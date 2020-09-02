@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="tau-lidar-camera-OnionIoT",
-    version="0.0.1",
+    name="TauLidarCamera",
+    version="0.0.5",
     author="Onion Corporation",
     author_email="hello@onion.io",
     description="Tau Lidar Camera communication and configuration package",
@@ -14,8 +14,7 @@ setuptools.setup(
     url="https://github.com/OnionIoT/tau-lidar-camera",
     packages=setuptools.find_packages(),
     install_requires=[
-        'serial',
-        'binascii'
+        'pyserial'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
