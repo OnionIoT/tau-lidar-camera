@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="TauLidarCamera",
-    version="0.0.5",
+    version="0.0.1",
     author="Onion Corporation",
     author_email="hello@onion.io",
     description="Tau Lidar Camera communication and configuration package",
