@@ -3,10 +3,10 @@ import binascii
 from .constants import *
 from .util import *
 from .communication import Communication
-from .d3 import FrameBuilder
-from .color import ColorMode, Color
+from TauLidarCommon.d3 import FrameBuilder
+from TauLidarCommon.color import ColorMode, Color
 from .info import CameraInfo
-from .frame import Frame
+from TauLidarCommon.frame import Frame
 
 class Camera :
     '''
@@ -100,7 +100,7 @@ class Camera :
         '''
         set default parameters.
         '''
-        self.setModulationFrequency(VALUE_10MHZ) ## frequency: 10MHZ
+        self.setModulationFrequency(VALUE_20MHZ) ## frequency: 10MHZ
         self.setModulationChannel(0)          ## autoChannelEnabled: 0, channel: 0
         self.setMode(0)                          ## Mode 0, wide fov
         self.setHdr(0)                           ## HDR off
