@@ -100,17 +100,19 @@ class Camera :
         '''
         set default parameters.
         '''
-        self.setModulationFrequency(VALUE_20MHZ) ## frequency: 10MHZ
-        self.setModulationChannel(0)          ## autoChannelEnabled: 0, channel: 0
+        self.setModulationFrequency(VALUE_20MHZ) ## frequency: 20MHZ
+        self.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
         self.setMode(0)                          ## Mode 0, wide fov
         self.setHdr(0)                           ## HDR off
-        self.setIntegrationTime3d(0, 1000)       ## set integration time 0: 1000
+        self.setIntegrationTime3d(0, 800)        ## set integration time 0: 1000
         self.setIntegrationTimeGrayscale(5000)   ## set integration time grayscale: 20000
         self.setMinimalAmplitude(0, 60)          ## set minimal amplitude 0: 80
         self.setOffset(0)                        ## set distance offset: 0
         self.setRoi(0, 0, 159, 59)               ## set ROI to max width and height
+        
+        ## static
         Camera.setColorMode(ColorMode.DISTANCE)
-        Camera.setRange(2000, 5000)
+        Camera.setRange(0, 7500)
 
     def setModulationFrequency(self, frequency):
         self._comm.setModulationFrequency(frequency)
