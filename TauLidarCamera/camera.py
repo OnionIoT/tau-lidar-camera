@@ -180,9 +180,10 @@ class Camera :
         minor = getValueLsb(firmware)
         return (major, minor)
 
-    def requestFrame(self) :
+    def readFrameRawData(self) :
         '''
-        request a new frame from sensor.
+        request a new raw data of a frame from sensor.
+        to compose Frame from raw data using FrameBuilder.composeFrame in d3.py.
         '''
 
         dataArray = self._comm.getDistanceGrayscale()
@@ -198,8 +199,9 @@ class Camera :
 
     def readFrame(self) :
         '''
-        get a new frame.
+        A convenient method to directly get a new frame, it is an expensive call, 
+        alternatively use readFrameRawData and compose Frame from a separate thread.
         '''
-        dataArray = self.requestFrame()
+        dataArray = self.readFrameRawData()
 
         return Camera.composeFrame(dataArray)
