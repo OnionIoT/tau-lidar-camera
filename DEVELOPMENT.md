@@ -14,6 +14,11 @@ Activate virtual environment:
 source bin/activate
 ```
 
+Local install of the [tau-lidar-common](https://github.com/OnionIoT/tau-lidar-common) package:
+```
+python -m pip install -e /path/to/tau-lidar-common
+```
+
 Local install of the tau-lidar-camera package:
 ```
 python -m pip install -e /path/to/tau-lidar-camera
