@@ -6,7 +6,7 @@ from .communication import Communication
 from TauLidarCommon.d3 import FrameBuilder
 from TauLidarCommon.color import ColorMode, Color
 from .info import CameraInfo
-from TauLidarCommon.frame import Frame
+from TauLidarCommon.frame import FrameType, Frame
 
 class Camera :
     '''
@@ -180,28 +180,36 @@ class Camera :
         minor = getValueLsb(firmware)
         return (major, minor)
 
-    def readFrameRawData(self) :
+    def readFrameRawData(self, frameType) :
         '''
         request a new raw data of a frame from sensor.
         to compose Frame from raw data using FrameBuilder.composeFrame in d3.py.
         '''
 
-        dataArray = self._comm.getDistanceGrayscale()
+        if frameType == FrameType.DISTANCE_GRAYSCALE:
+            dataArray = self._comm.getDistanceGrayscale()
+            return dataArray[TOF_635_IMAGE_HEADER_SIZE : len(dataArray)]
 
-        return dataArray[TOF_635_IMAGE_HEADER_SIZE : len(dataArray)]
+        elif frameType == FrameType.DISTANCE_AMPLITUDE:
+            dataArray = self._comm.getDistanceAmplitude()
+            return dataArray[TOF_635_IMAGE_HEADER_SIZE : len(dataArray)]
+
+        elif frameType == FrameType.DISTANCE:
+            dataArray = self._comm.getDistance()
+            return dataArray[TOF_635_IMAGE_HEADER_SIZE : len(dataArray)]
 
     @staticmethod
-    def composeFrame(dataArray) :
+    def composeFrame(dataArray, frameType) :
         '''
         compose Frame using raw bytearray data
         '''
-        return Camera._frameBuilder.composeFrame(dataArray)
+        return Camera._frameBuilder.composeFrame(dataArray, frameType)
 
-    def readFrame(self) :
+    def readFrame(self, frameType=FrameType.DISTANCE_GRAYSCALE) :
         '''
         A convenient method to directly get a new frame, it is an expensive call, 
         alternatively use readFrameRawData and compose Frame from a separate thread.
         '''
-        dataArray = self.readFrameRawData()
+        dataArray = self.readFrameRawData(frameType)
 
-        return Camera.composeFrame(dataArray)
+        return Camera.composeFrame(dataArray, frameType)

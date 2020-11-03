@@ -451,3 +451,29 @@ class Communication:
 
         type, data = self._sendCommandSingleByte(COMMAND_GET_DISTANCE_GRAYSCALE, AUTO_REPEAT, dataSize)
         return data
+
+    def getDistanceAmplitude(self):
+        '''
+        get Distance Amplitude image.
+        '''
+        dataSize = 0
+
+        if self._hdr == HDR_SPATIAL : dataSize = 2 * (self._xMax - self._xMin + 1) * (self._yMax - self._yMin + 1) + 80 ## 16 bit distance/2 + 16 bit
+        else :
+            dataSize = 4 * (self._xMax - self._xMin + 1) * (self._yMax - self._yMin + 1) + 80 ## 16 bit distance + 16 bit amplitude
+
+        type, data = self._sendCommandSingleByte(COMMAND_GET_DISTANCE_AMPLITUDE, AUTO_REPEAT, dataSize)
+        return data
+
+    def getDistance(self):
+        '''
+        get Distance only.
+        '''
+        dataSize = 0
+
+        if self._hdr == HDR_SPATIAL : dataSize = (self._xMax - self._xMin + 1) * (self._yMax - self._yMin + 1) + 80 ## 16 bit distance
+        else :
+            dataSize = 2 * (self._xMax - self._xMin + 1) * (self._yMax - self._yMin + 1) + 80 ## 16 bit distance
+
+        type, data = self._sendCommandSingleByte(COMMAND_GET_DISTANCE, AUTO_REPEAT, dataSize)
+        return data
