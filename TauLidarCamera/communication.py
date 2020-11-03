@@ -1,6 +1,7 @@
 import serial
 import serial.tools.list_ports
 from time import sleep
+import binascii
 
 from .constants import *
 from .crc import *
@@ -76,8 +77,19 @@ class Communication:
                 try:
                     self._ser.port = port_no
                     self._ser.open()
-                    connected = True
-                    break
+
+                    ## Verify if it is valid device
+                    dataArray = self.getIdentification()
+                    identificationValue = int(binascii.hexlify(dataArray), 16)
+                    chipType = (identificationValue & MASK_CHIP_TYPE_DEVICE) >> SHIFT_CHIP_TYPE_DEVICE
+                    chipVersion = (identificationValue & MASK_VERSION) >> SHIFT_VERSION
+                    
+                    nChipType = int(chipType)
+                    nChipVersion = int(chipVersion)
+                    
+                    if (nChipType >= 4 and nChipVersion >= 0):
+                        connected = True
+                        break
                 except:
                     pass
 
