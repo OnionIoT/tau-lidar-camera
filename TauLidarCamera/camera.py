@@ -185,7 +185,7 @@ class Camera :
         request a new raw data of a frame from sensor.
         to compose Frame from raw data using FrameBuilder.composeFrame in d3.py.
         '''
-
+        
         if frameType == FrameType.DISTANCE_GRAYSCALE:
             dataArray = self._comm.getDistanceGrayscale()
             return dataArray[TOF_635_IMAGE_HEADER_SIZE : len(dataArray)]
@@ -203,6 +203,7 @@ class Camera :
         '''
         compose Frame using raw bytearray data
         '''
+        
         return Camera._frameBuilder.composeFrame(dataArray, frameType)
 
     def readFrame(self, frameType=FrameType.DISTANCE_GRAYSCALE) :
@@ -210,6 +211,7 @@ class Camera :
         A convenient method to directly get a new frame, it is an expensive call, 
         alternatively use readFrameRawData and compose Frame from a separate thread.
         '''
+        
         dataArray = self.readFrameRawData(frameType)
 
         return Camera.composeFrame(dataArray, frameType)
