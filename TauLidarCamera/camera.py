@@ -71,6 +71,8 @@ class Camera :
 
         port = self._comm.open(port)
 
+        self.setDefaultParameters()
+
         return self
 
     def info(self):
