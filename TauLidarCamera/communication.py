@@ -71,6 +71,7 @@ class Communication:
 
         message = ""
         if port is None:
+            print('Looking for connected Tau LiDAR Camera hardware ...')
             ports = list(serial.tools.list_ports.comports())
             connected = False
             for port_no, description, address in ports:
@@ -83,10 +84,10 @@ class Communication:
                     identificationValue = int(binascii.hexlify(dataArray), 16)
                     chipType = (identificationValue & MASK_CHIP_TYPE_DEVICE) >> SHIFT_CHIP_TYPE_DEVICE
                     chipVersion = (identificationValue & MASK_VERSION) >> SHIFT_VERSION
-                    
+
                     nChipType = int(chipType)
                     nChipVersion = int(chipVersion)
-                    
+
                     if (nChipType >= 4 and nChipVersion >= 0):
                         connected = True
                         break
@@ -94,14 +95,14 @@ class Communication:
                     pass
 
             if not connected:
-                message = "No ToF camera found, please check: \n1. if ToF camera is connected; \n2. if current user has permission over the serial port."
+                message = "No Tau Camera found, please check: \n1. If Tau Camera is connected; \n2. If current user has permission to access all serial ports."
                 raise Exception(message)
         else:
             self._ser.port = port
             try:
                 self._ser.open()
             except:
-                message = "Failed connecting to the serial port %s, please check: \n1. if ToF camera is connected; \n2. if current user has permission" % port
+                message = "Failed connecting to the serial port %s, please check: \n1. If Tau Camera is connected; \n2. If current user has permission to access the port" % port
                 raise Exception(message)
 
         return self
