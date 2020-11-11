@@ -92,7 +92,7 @@ class Communication:
                         connected = True
                         break
                 except:
-                    pass
+                    self._ser.close()
 
             if not connected:
                 message = "No Tau Camera found, please check: \n1. If Tau Camera is connected; \n2. If current user has permission to access all serial ports."
