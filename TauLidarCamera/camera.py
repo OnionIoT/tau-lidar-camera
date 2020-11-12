@@ -69,7 +69,10 @@ class Camera :
         if self._comm._ser.is_open :
             raise Exception("Camera is already opened!")
 
-        port = self._comm.open(port)
+        self._comm.open(port)
+
+        if self._comm._ser.is_open: 
+            self.setDefaultParameters()
 
         return self
 
