@@ -1,7 +1,7 @@
 import os
 import setuptools
 
-# get key package details from py_pkg/__version__.py
+# get key package details from __version__.py file
 about = {}  # type: ignore
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'TauLidarCamera', '__version__.py')) as f:

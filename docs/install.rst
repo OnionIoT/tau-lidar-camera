@@ -13,7 +13,7 @@ To install TauLidarCamera, you can use pip and run this command in your terminal
 Alternate Method: Get the Source Code
 -------------------------------------
 
-TauLidarCamera is developed on [GitHub](https://github.com/OnionIoT/tau-lidar-camera)
+TauLidarCamera is developed on `GitHub <https://github.com/OnionIoT/tau-lidar-camera>`_
 
 You can either clone the public repository::
 
