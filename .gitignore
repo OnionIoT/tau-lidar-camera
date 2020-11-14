@@ -1,6 +1,8 @@
 build/
 dist/
 *.egg-info/
+bin/
+
 **/_build
 **/_static
 **/_templates
