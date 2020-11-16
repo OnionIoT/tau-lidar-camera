@@ -1,6 +1,9 @@
 # Documentation
 
-Using Sphinx to generate HTML documentation
+Using [Sphinx](https://www.sphinx-doc.org/en/master/) to generate HTML documentation and the following Sphinx extensions:
+
+* [AutoDoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html) for pulling in documentation from docstrings in a semi-automatic way.
+* [Napoleon](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html) to support NumPy and Google style docstrings
 
 ## Prerequisites
 
