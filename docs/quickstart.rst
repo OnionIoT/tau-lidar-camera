@@ -51,7 +51,7 @@ Display depth map using OpenCV:
 
    cv2.imshow('Depth Map', mat_depth_rgb)
 
-   if cv2.waitKey(1) == 27: break
+   cv2.waitKey(0)
 
 Examples
 --------
