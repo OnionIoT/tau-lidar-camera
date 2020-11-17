@@ -6,11 +6,20 @@ Samples of programs that use the Tau LiDAR Camera, each demonstrating the functi
 
 ### What this demonstrates
 
-TODO: brief explanation of what this sample program demonstrates in terms of using the API
+The sample program demonstrates acquiring frame with distance / deepth information only.
 
 ### Pre-requisites
 
-TODO: a list of pre-requisites/dependencies that must be installed to run the program. For example, the TauLidarCamera python module and the OpenCV python module. If helpful, include links for installation instructions.
+Pre-requisites/dependencies:
+
+  ## TauLidarCamera python module:
+  
+    #pip install TauLidarCamera
+    
+  ## OpenCV python module
+  
+    #pip install opencv-python
+  
 
 ### How to Run
 
