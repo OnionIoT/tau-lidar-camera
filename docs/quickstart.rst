@@ -5,7 +5,8 @@ To get started in a hurry, follow the examples on this page.
 
 First, make sure the TauLidarCamera module is `installed <install>`_
 
-##Imports:
+Imports:
+-------
 
    from TauLidarCommon.frame import FrameType, Frame
    
@@ -16,11 +17,13 @@ First, make sure the TauLidarCamera module is `installed <install>`_
    from TauLidarCommon.color import ColorMode
    
 
-##Open Camera:
+Open Camera:
+-----------
 
    camera = Camera.open()
    
-##Query camera info:
+Query camera info:
+-----------------
 
    cameraInfo = camera.info()
    print("\nToF camera opened successfully:")
@@ -31,7 +34,8 @@ First, make sure the TauLidarCamera module is `installed <install>`_
    print("    resolution: %s" % cameraInfo.resolution)
    print("    port:       %s" % cameraInfo.port)
    
-##Set parameters:
+Set parameters:
+--------------
 
    camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
    camera.setIntegrationTime3d(0, 800)        ## set integration time 0: 1000
@@ -40,11 +44,13 @@ First, make sure the TauLidarCamera module is `installed <install>`_
    ## static
    Camera.setRange(0, 4500)                   ## points in the distance range to be colored
 
-##Read a frame:
+Read a frame:
+------------
 
    frame = camera.readFrame(FrameType.DISTANCE)
 
-##Display depth map using OpenCV:
+Display depth map using OpenCV:
+------------------------------
 
    mat_depth_rgb = np.frombuffer(frame.data_depth_rgb, dtype=np.uint16, count=-1, offset=0).reshape(frame.height, frame.width, 3)
    mat_depth_rgb = mat_depth_rgb.astype(np.uint8)
