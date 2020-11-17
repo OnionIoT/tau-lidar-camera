@@ -12,11 +12,11 @@ The sample program demonstrates acquiring frame with distance / deepth informati
 
 Pre-requisites/dependencies:
 
-  #### TauLidarCamera python module:
+  #### TauLidarCamera python module: ####
   
     #pip install TauLidarCamera
     
-  #### OpenCV python module
+  #### OpenCV python module ####
   
     #pip install opencv-python
   
