@@ -7,6 +7,7 @@ First, make sure the TauLidarCamera module is `installed <install>`_
 
 Imports
 
+```
 from TauLidarCommon.frame import FrameType, Frame
 
 from TauLidarCamera.camera import Camera
@@ -14,6 +15,7 @@ from TauLidarCamera.camera import Camera
 from TauLidarCamera.constants import VALUE_20MHZ
 
 from TauLidarCommon.color import ColorMode
+```
 
 TODO: short write-up introducing the following topics, for an example of a good quickstart page see  https://requests.readthedocs.io/en/latest/user/quickstart/
 
