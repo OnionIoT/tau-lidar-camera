@@ -1,7 +1,7 @@
 # TauLidarCamera
 Python API for the Onion Tau Lidar Camera
 
-![Onion Tau Lidar Camera](./docs/img/onion-tau-lidar-camera-00.png)
+![Onion Tau Lidar Camera](https://github.com/OnionIoT/tau-lidar-camera/raw/master/docs/img/onion-tau-lidar-camera-00.png)
 
 ## Main Features
 
