@@ -8,12 +8,14 @@ First, make sure the TauLidarCamera module is `installed <install>`_
 
 TODO: short write-up introducing the following topics, for an example of a good quickstart page see  https://requests.readthedocs.io/en/latest/user/quickstart/
 
-* imports
+imports
 
+```
 from TauLidarCommon.frame import FrameType, Frame
 from TauLidarCamera.camera import Camera
 from TauLidarCamera.constants import VALUE_20MHZ
 from TauLidarCommon.color import ColorMode
+```
 
 * how to open the camera
 * how to set default parameters
