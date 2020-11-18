@@ -49,6 +49,10 @@ Set parameters:
    camera.setMinimalAmplitude(0, 60)          ## set minimal amplitude 0: 80
 
    Camera.setRange(0, 4500)                   ## points in the distance range to be colored
+   
+If you request distance/depth plus grayscle image, you need set approriate "integration time grayscale":
+
+   camera.setIntegrationTimeGrayscale(15000)  ## set integration time grayscale: 8000, needed when requiring FrameType.DISTANCE_GRAYSCALE
 
 Read a frame:
 -------------
@@ -77,6 +81,8 @@ To display depth map, convert the data array of depth data to 3 channel BGR imag
    mat_depth_rgb = mat_depth_rgb.astype(np.uint8)
 
    cv2.imshow('Depth Map', mat_depth_rgb)
+
+If you see a window displaying depth map, congratulation, your Tau LiDAR camera is working!
 
 If you requested distance/depth plus grayscle image, to display the grayscle image, convert the data array of depth data to single channel image:
 
