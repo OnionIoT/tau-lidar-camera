@@ -27,9 +27,9 @@ python -m pip install TauLidarCamera
 
 Supports Python 3.6.1+
 
-## API Reference & Documentation
+## API Reference & Documentation on [ReadTheDocs](https://taulidarcamera.readthedocs.io/)
 
-Documentation & API reference can be found online: TODO
+Documentation & API reference can be found online: https://taulidarcamera.readthedocs.io/
 
 ## Examples
 
