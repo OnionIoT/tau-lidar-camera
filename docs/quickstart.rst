@@ -8,6 +8,8 @@ First, make sure the TauLidarCamera module is `installed <install>`_
 Imports:
 --------
 
+Before you start, you need import some TauLiDar libraries:
+
    from TauLidarCommon.frame import FrameType, Frame
 
    from TauLidarCamera.camera import Camera
@@ -19,11 +21,13 @@ Imports:
 
 Open Camera:
 ------------
+Call static method of Camera to open an instance:
 
    camera = Camera.open()
 
 Query camera info:
 ------------------
+You may verify if the camera connected correctly by checking the camera info:
 
    cameraInfo = camera.info()
 
@@ -41,12 +45,19 @@ Query camera info:
 
 Set parameters:
 ---------------
+For multiple cameras, you may set them work on different channels, however if you have only one, set it to 0:
 
    camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
 
+Integration Time could be from 0 to 1000, depends on the reflectibility and distance of the target object, for an object in about 2-3 meters, you may try set it to 800:
+
    camera.setIntegrationTime3d(0, 800)        ## set integration time 0: 1000
 
+Noise level (Minimal Amplitude):
+
    camera.setMinimalAmplitude(0, 60)          ## set minimal amplitude 0: 80
+
+Distance range (mm)  to be colored:
 
    Camera.setRange(0, 4500)                   ## points in the distance range to be colored
    
