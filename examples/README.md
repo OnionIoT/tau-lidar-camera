@@ -13,21 +13,23 @@ The sample program demonstrates acquiring frames with distance / depth informati
 Pre-requisites/dependencies:
 
   #### TauLidarCamera python module:
-  
+
     #pip install TauLidarCamera
-    
+
   #### OpenCV python module
-  
+
     #pip install opencv-python
-  
+
 
 ### How to Run
 
-    Command to run the program:
-    
-    #python distane.py
-    
-    A depth map will be showing.
+Command to run the program:
+
+```    
+#python distance.py
+```
+
+A depth map will be showing.
 
 ## `distancePlusAmplitude.py`
 
@@ -40,20 +42,22 @@ The sample program demonstrates acquiring frames with both distance / depth and 
 Pre-requisites/dependencies:
 
   #### TauLidarCamera python module:
-  
+
     #pip install TauLidarCamera
-    
+
   #### OpenCV python module
-  
+
     #pip install opencv-python
 
 ### How to Run
 
-    Command to run the program:
-    
-    #python distancePlusAmplitude.py
-    
-    Depth map and amplitude image will be showing in separate windows.
+Command to run the program:
+
+```    
+#python distancePlusAmplitude.py
+```
+
+Depth map and amplitude image will be showing in separate windows.
 
 ## `distancePlusGrayscale.py`
 
@@ -66,17 +70,19 @@ The sample program demonstrates acquiring frames with both distance / depth and 
 Pre-requisites/dependencies:
 
   #### TauLidarCamera python module:
-  
+
     #pip install TauLidarCamera
-    
+
   #### OpenCV python module
-  
+
     #pip install opencv-python
 
 ### How to Run
 
-    Command to run the program:
-    
-    #python distancePlusGrayscale.py
-    
-    Depth map and grayscale image will be showing in separate windows.
+Command to run the program:
+
+```
+#python distancePlusGrayscale.py
+```  
+
+Depth map and grayscale image will be showing in separate windows.

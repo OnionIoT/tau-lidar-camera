@@ -17,6 +17,8 @@ Getting Started
    :maxdepth: 1
 
    install
+   quickstart
+   examples
 
 
 The API Documentation / Guide
