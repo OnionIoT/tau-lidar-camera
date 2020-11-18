@@ -45,11 +45,11 @@ You may verify if the camera connected correctly by checking the camera info:
 
 Set parameters:
 ---------------
-For multiple cameras, you may set them work on different channels, however if you have only one, set it to 0:
+For multiple cameras, you may set them work in different channels, however if you have only one, set it to 0:
 
    camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
 
-Integration Time could be from 0 to 1000, depends on the reflectibility and distance of the target object, for an object in about 2-3 meters, you may try set it to 800:
+Integration Time could be from 0 to 1000, depends on the surface reflectability and distance of the target object, for an object in about 2-3 meters, you may try set it to 800:
 
    camera.setIntegrationTime3d(0, 800)        ## set integration time 0: 1000
 
