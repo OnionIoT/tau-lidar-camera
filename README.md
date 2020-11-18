@@ -1,4 +1,7 @@
 # TauLidarCamera
+
+[![Documentation Status](https://readthedocs.org/projects/taulidarcamera/badge/?version=latest)](https://taulidarcamera.readthedocs.io/en/latest/?badge=latest)
+
 Python API for the Onion Tau Lidar Camera
 
 ![Onion Tau Lidar Camera](https://github.com/OnionIoT/tau-lidar-camera/raw/master/docs/img/onion-tau-lidar-camera-00.png)
