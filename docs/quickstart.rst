@@ -110,14 +110,14 @@ To display depth map, convert the data array of depth data to 3 channel BGR imag
 
 If you see a window displaying depth map, congratulation, your Tau LiDAR camera is working!
 
-If you requested distance/depth plus grayscale image, to display the grayscale image, convert the data array of depth data to single channel image:
+If you requested distance/depth plus grayscale image, to display the grayscale image, convert the data array of grayscale data to single channel image:
 
 .. code-block:: python
 
    mat_grayscale = np.frombuffer(frame.data_grayscale, dtype=np.uint16, count=-1, offset=0).reshape(frame.height, frame.width)
    mat_grayscale = mat_grayscale.astype(np.uint8)
 
-If you requested distance/depth plus grayscale image, to display the grayscale image, convert the data array of depth data to single channel image:
+If you requested distance/depth plus amplitude image, to display the amplitude image, convert the data array of amplitude data to single channel image:
 
 .. code-block:: python
 
