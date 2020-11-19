@@ -123,3 +123,9 @@ If you requested distance/depth plus amplitude image, to display the amplitude i
 
    mat_amplitude = np.frombuffer(frame.data_amplitude, dtype=np.float32, count=-1, offset=0).reshape(frame.height, frame.width)
    mat_amplitude = mat_amplitude.astype(np.uint8)
+
+
+Next step:
+---------
+
+Have a play with example applications: https://github.com/OnionIoT/tau-lidar-camera/tree/master/examples
