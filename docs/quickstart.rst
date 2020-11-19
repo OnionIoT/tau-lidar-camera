@@ -108,7 +108,7 @@ To display depth map, convert the data array of depth data to 3 channel BGR imag
 
    cv2.imshow('Depth Map', mat_depth_rgb)
 
-If you see a window displaying depth map, congratulation, your Tau LiDAR camera is working!
+If you see a window displaying depth map, congratulation, your Tau LiDar camera is working!
 
 If you requested distance/depth plus grayscale image, to display the grayscale image, convert the data array of grayscale data to single channel image:
 
