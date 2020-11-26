@@ -126,6 +126,6 @@ If you requested distance/depth plus amplitude image, to display the amplitude i
 
 
 Next step:
----------
+----------
 
-Have a play with example applications: https://github.com/OnionIoT/tau-lidar-camera/tree/master/examples
+Play around with the example applications: https://github.com/OnionIoT/tau-lidar-camera/tree/master/examples
