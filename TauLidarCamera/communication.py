@@ -10,42 +10,6 @@ from .util import *
 class Communication:
     '''
     Communication to the ToF sensor via serial port.
-
-    Attributes
-    ----------
-
-    Methods
-    -------
-    open(_port)
-        To open the communication to ToF sensor.
-    close()
-        To close the communication to ToF sensor.
-
-    setModulationFrequency(frequency)
-        set Modulation Frequency (10mHz or 10mHz).
-    setModulationChannel(autoChannelEnabled, channel)
-        set Modulation Channel.
-    setMode(mode)
-        set Mode.
-    setHdr(hdr)
-        set Hdr.
-    setIntegrationTimeGrayscale(integrationTime)
-        set Integration Time Grayscale.
-    setOffset(offset)
-        set Offset.
-    setIntegrationTime3d(index, integrationTime)
-        set Integration Time 3d.
-    setMinimalAmplitude(index, amplitude)
-        set Minimal Amplitude.
-    setRoi(xMin, yMin, xMax, yMax)
-        set Roi.
-
-    getChipInformation()
-        get Chip Information.
-    getFirmwareRelease()
-        get Firmware Release.
-    getDistanceGrayscale()
-        get Distance Grayscale.
     '''
 
     def __init__(self):
