@@ -46,7 +46,7 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
-autodoc_mock_imports = ["TauLidarCommon"]
+autodoc_mock_imports = ["TauLidarCommon", "serial"]
 
 
 # -- Options for HTML output -------------------------------------------------
