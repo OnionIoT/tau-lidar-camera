@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 ### Python Library versions
-> Run `examples/check_version.py` and paste the output
+> Run `pip list | grep TauLidar` in the command-line and paste the output
 
 ### Describe the bug
 
