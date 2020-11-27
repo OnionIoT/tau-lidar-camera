@@ -14,16 +14,24 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
+# -- Python module information -----------------------------------------------
+
+# get key package details from __version__.py file
+
+about = {}  # type: ignore
+here = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(here, '..', 'TauLidarCamera', '__version__.py')) as f:
+    exec(f.read(), about)
 
 # -- Project information -----------------------------------------------------
 
-project = 'TauLidarCamera'
+project = about['__title__']
 copyright = '2020, Onion Corporation'
-author = 'Onion Corporation'
+author = about['__author__']
 
 
 # The full version, including alpha/beta/rc tags
-version = '0.0.1' # TODO: read this from __version.py file (note importing TauLidarCamera and using TauLidarCamera.__version__ doesn't work)
+version = about['__version__']
 release = version
 
 
