@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 ### Python Library versions
-> Run `pip list | grep TauLidar` in the command-line and paste the output
+> Run `pip list | grep TauLidar` in the command-line and paste the output. Include some details on your system as well
 
 ### Camera Info
 > If possible, paste the output of `camera.info()` from Python (after camera has been successfully opened)

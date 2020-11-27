@@ -32,6 +32,16 @@ this part of the documentation is for you.
 
   api
 
+Contributing
+-------------
+
+How you can get involved:
+
+.. toctree::
+   :maxdepth: 1
+
+   feedback
+
 Index
 ==================
 
