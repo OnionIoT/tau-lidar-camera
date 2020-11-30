@@ -56,6 +56,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 autodoc_mock_imports = ["TauLidarCommon", "serial"]
 
+# explicitly assign master document to index.rst - https://github.com/readthedocs/readthedocs.org/issues/2569
 master_doc = 'index'
 
 
