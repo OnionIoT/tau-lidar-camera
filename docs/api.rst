@@ -33,3 +33,11 @@ Util Module
 
 .. automodule:: TauLidarCamera.util
     :members:
+
+
+TauLidarCommon Library
+-----------------------
+
+TauLidarCamera depends on the TauLidarCommon library and makes use of the Color and Frame modules implemented in TauLidarCommon.
+
+See the documentation for `TauLidarCommon <https://taulidarcommon.readthedocs.io/>`_ for more details.
