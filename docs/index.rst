@@ -18,6 +18,7 @@ Getting Started
 
    install
    quickstart
+   troubleshooting
    examples
 
 
