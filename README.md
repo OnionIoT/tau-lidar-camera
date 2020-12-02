@@ -31,12 +31,16 @@ Supports Python 3.6.1+
 
 Documentation & API reference can be found online: https://taulidarcamera.readthedocs.io/
 
-## Examples
+## [Troubleshooting](https://taulidarcamera.readthedocs.io/en/latest/troubleshooting.html)
 
-Example programs using the Tau Lidar Camera and the TauLidarCamera Python module can be found in the [`examples` directory](./examples).
+In case you encounter any issues, check out the [Troubleshooting section in the documentation](https://taulidarcamera.readthedocs.io/en/latest/troubleshooting.html) for tips on resolving any issues you encounter!
+
+## [Examples](https://github.com/OnionIoT/tau-lidar-camera/tree/master/examples)
+
+Example programs using the Tau Lidar Camera and the TauLidarCamera Python module can be found in the [`examples` directory on GitHub](https://github.com/OnionIoT/tau-lidar-camera/tree/master/examples).
 
 ## Contributing to Development
 
-See the [development document](DEVELOPMENT.md) for instructions on local development.
+See the [development document](https://github.com/OnionIoT/tau-lidar-camera/blob/master/DEVELOPMENT.md) for instructions on local development.
 
 More info on contributing coming soon!
