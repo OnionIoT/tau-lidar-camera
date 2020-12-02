@@ -12,6 +12,10 @@ class Camera :
     '''
     ToF camera class, access point to the ToF camera.
 
+    TauLidarCamera library depends on the TauLidarCommon library.
+
+    If you install TauLidarCamera using pip (pip install TauLidarCamera), TauLidarCommon library will be automaticall installed. 
+    
     To initiate an instance of Camera object, call static method of Camera.open(port=None).
     '''
 
@@ -221,11 +225,29 @@ class Camera :
     def readFrameRawData(self, frameType) :
         '''
         To request raw data of a frame from camera.
-        to compose Frame from raw data using FrameBuilder.composeFrame in d3.py.
+
+        You may use readFrameRawData(frameType) only when you consider a two-step read-and-compose a Frame object, which readFrameRawData(frameType)
+        to obtain a frame raw data, and then use FrameBuilder.composeFrame(dataArray, frameType) to create an Frame object, normally in
+        a separate thread, to have a better frame rate.
+
+        You may simply call readFrame(frameType) to obtain a Frame object without using this method if the frame rate is not critical.
+
+        FrameType.DISTANCE: depth data only
+
+        FrameType.DISTANCE_GRAYSCALE: depth data plus grayscale
+
+        FrameType.DISTANCE_AMPLITUDE: depth data plus amplitude
 
         Returns
         ----------
         bytearray
+            Length of the raw data will be different depends on the frameType specified:
+
+        FrameType.DISTANCE: 2 bytes 32 float distance for each data point, 160 (image width) x 160 (image height) x 2;
+
+        FrameType.DISTANCE_GRAYSCALE: 2 bytes 32 float distance and 1 byte unit 8 grayscale for each data point, 160 (image width) x 160 (image height) x (2 + 1);
+
+        FrameType.DISTANCE_AMPLITUDE: 2 bytes 32 float distance and 2 bytes 32 float amplitude for each data point, 160 (image width) x 160 (image height) x (2 + 2);
         '''
         
         if frameType == FrameType.DISTANCE_GRAYSCALE:
@@ -244,15 +266,95 @@ class Camera :
     def composeFrame(dataArray, frameType) :
         '''
         Convenient method to compose Frame using raw bytearray data.
+
+        To compose a Frame object, you need to specify which FrameType of the raw data, which may be:
+
+        FrameType.DISTANCE: distance / depth only
+
+        FrameType.DISTANCE_GRAYSCALE: distance / depth plus grayscale
+
+        FrameType.DISTANCE_AMPLITUDE: distance / depth plus amplitude
+
+        Returns
+        ----------
+        Frame
+            An instance of Frame.
+
+            The members of the Frame object will be populated:
+            
+                data_depth,
+                data_depth_rgb,
+                points_3d
+
+            In addition, depends on the FrameType requested, additional member may be populated:
+
+            FrameType.DISTANCE_GRAYSCALE: data_grayscale.
+
+            FrameType.DISTANCE_AMPLITUDE: data_amplitude.
         '''
         
         return Camera._frameBuilder.composeFrame(dataArray, frameType)
 
     def readFrame(self, frameType=FrameType.DISTANCE_GRAYSCALE) :
         '''
-        A convenient method to directly get a new frame, it is an expensive call, 
-        alternatively you may use readFrameRawData and compose Frame from a separate thread in your application
+        A convenient method to directly get a new Frame object.
+
+        Specifying a frameType to get a frame with distance / depth only, or distance / depth plus grayscale or amplitude:
+
+        FrameType.DISTANCE: distance / depth only
+
+        FrameType.DISTANCE_GRAYSCALE: distance / depth plus grayscale
+
+        FrameType.DISTANCE_AMPLITUDE: distance / depth plus amplitude
+        
+        This method is an expensive call, alternatively you may use readFrameRawData and compose Frame from a separate thread in your application
         to get better frame rate.
+
+        For example, for an application which the frame rate is not critical, a simple call of readFrame to get an instance of Frame object:
+
+        frame = camera.readFrame(self, frameType=FrameType.DISTANCE)
+
+        If your application require a fast frame rate, it might be a good idea to request frame raw data and compose Frame object in different threads:
+        
+        The local thread to request a frame raw data:
+
+        dataArray = self.readFrameRawData(frameType)
+
+        In another thread to compose the Frame object from dataArray, and the local thread can continue to request next frame raw data:
+
+        _frameBuilder.composeFrame(dataArray, frameType)
+
+        Returns
+        ----------
+        Frame
+            An instance of Frame.
+
+        The members of the Frame object will be populated:
+            
+                data_depth,
+                data_depth_rgb,
+                points_3d
+
+            In addition, depends on the FrameType requested, additional member may be populated:
+
+            FrameType.DISTANCE_GRAYSCALE: data_grayscale.
+
+            FrameType.DISTANCE_AMPLITUDE: data_amplitude.
+
+        Example of converting data_depth_rgb to OpenCV Mat object:
+                
+            mat_depth_rgb = np.frombuffer(frame.data_depth_rgb, dtype=np.uint16, count=-1, offset=0).reshape(frame.height, frame.width, 3)
+            mat_depth_rgb = mat_depth_rgb.astype(np.uint8)
+
+        Example of converting data_grayscale to OpenCV Mat object:
+                
+            mat_grayscale = np.frombuffer(frame.data_grayscale, dtype=np.uint16, count=-1, offset=0).reshape(frame.height, frame.width)
+            mat_grayscale = mat_grayscale.astype(np.uint8)
+
+        Example of converting data_amplitude to OpenCV Mat object:
+
+            mat_amplitude = np.frombuffer(frame.data_amplitude, dtype=np.float32, count=-1, offset=0).reshape(frame.height, frame.width)
+            mat_amplitude = mat_amplitude.astype(np.uint8)
         '''
         
         dataArray = self.readFrameRawData(frameType)
