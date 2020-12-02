@@ -21,6 +21,16 @@ If you run a program that uses the TauLidarCamera library and it successfully op
 
 **The Solution:**
 
-Try switching to a high-quality cable! If possible, try using a not-super-long USB-C to USB-C cable from a reputable brand.
+Try switching to a **high-quality cable**! If possible, try using a not-super-long USB-C to USB-C cable from a reputable brand. Then try running the program again.
 
-Then try running the program again.
+Try to avoid:
+
+* Long cables
+* USB hubs
+* USB adapters
+
+Try to use:
+
+* Shorter cables
+* Direct USB-C to USB-C if possible
+* Cables from reputable brands
