@@ -33,8 +33,8 @@ def main():
             print("    port:       %s" % cameraInfo.port)
 
             camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
-            camera.setIntegrationTime3d(0, 800)        ## set integration time 0: 1000
-            camera.setMinimalAmplitude(0, 60)          ## set minimal amplitude 0: 80
+            camera.setIntegrationTime3d(0, 1000)        ## set integration time 0: 1000
+            camera.setMinimalAmplitude(0, 10)          ## set minimal amplitude 0: 80
             
             ## static
             Camera.setRange(0, 4500)                   ## points in the distance range to be colored
@@ -57,6 +57,13 @@ def main():
 
     print("\nPress Esc key over Depth Map or Grayscale to shutdown ...")  
 
+
+    cv2.namedWindow('Depth Map')
+    cv2.namedWindow('Amplitude')
+
+    cv2.moveWindow('Depth Map', 20, 20)
+    cv2.moveWindow('Amplitude', 20, 360)
+
     try:
         count = 0
         while True:
@@ -76,8 +83,13 @@ def main():
             mat_amplitude = np.frombuffer(frame.data_amplitude, dtype=np.float32, count=-1, offset=0).reshape(frame.height, frame.width)
             mat_amplitude = mat_amplitude.astype(np.uint8)
 
-            cv2.imshow('Depth Map', mat_depth_rgb)
-            cv2.imshow('Amplitude', mat_amplitude)
+            upscale = 4
+            depth_img =  cv2.resize(mat_depth_rgb, (frame.width*upscale, frame.height*upscale))
+            amplitude_img =  cv2.resize(mat_amplitude, (frame.width*upscale, frame.height*upscale))
+
+            cv2.imshow('Depth Map', depth_img)
+            cv2.imshow('Amplitude', amplitude_img)
+            
 
             if cv2.waitKey(1) == 27: break
 
