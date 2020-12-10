@@ -1,72 +1,38 @@
-import sys
-import os
-import asyncio
-import json
-from time import sleep, time
-from threading import Thread, Lock
-
 import numpy as np
 import cv2
 
-from TauLidarCommon.frame import FrameType, Frame
+from TauLidarCommon.frame import FrameType
 from TauLidarCamera.camera import Camera
-from TauLidarCamera.constants import VALUE_10MHZ, VALUE_20MHZ
-from TauLidarCommon.color import ColorMode
 
-def main():
-    attempts = 0
+def setup():
+    ports = Camera.scan()                      ## Scan for available Tau Camera devices
+
+    Camera.setRange(0, 4500)                   ## points in the distance range to be colored
+    
+    camera = Camera.open(ports[0])             ## Open the first available Tau Camera
+    camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
+    camera.setIntegrationTime3d(0, 1000)       ## set integration time 0: 1000
+    camera.setMinimalAmplitude(0, 10)          ## set minimal amplitude 0: 80
+
+    cameraInfo = camera.info()
+
+    print("\nToF camera opened successfully:")
+    print("    model:      %s" % cameraInfo.model)
+    print("    firmware:   %s" % cameraInfo.firmware)
+    print("    uid:        %s" % cameraInfo.uid)
+    print("    resolution: %s" % cameraInfo.resolution)
+    print("    port:       %s" % cameraInfo.port)
+
+    print("\nPress Esc key over GUI or Ctrl-c in terminal to shutdown ...")  
+
+    return camera
+
+
+def run(camera):
     while True:
-        try:
-            '''
-            By default, Camera will connect to the first available ToF device. 
-            Alternatively can specify serial port by using Camera.open('/dev/ttyACM0') to open specific port
-            '''
-            camera = Camera.open()
+        frame = camera.readFrame(FrameType.DISTANCE)
 
-            cameraInfo = camera.info()
-            print("\nToF camera opened successfully:")
-
-            print("    model:      %s" % cameraInfo.model)
-            print("    firmware:   %s" % cameraInfo.firmware)
-            print("    uid:        %s" % cameraInfo.uid)
-            print("    resolution: %s" % cameraInfo.resolution)
-            print("    port:       %s" % cameraInfo.port)
-
-            camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
-            camera.setIntegrationTime3d(0, 1000)        ## set integration time 0: 1000
-            camera.setMinimalAmplitude(0, 10)          ## set minimal amplitude 0: 80
-            
-            ## static
-            Camera.setRange(0, 4500)                   ## points in the distance range to be colored
-            
-            break
-
-        except Exception as e:
-            attempts += 1
-
-            if attempts > 10:
-                print("Exiting due to failure of opening ToF camera!")
-                print("Error: %s" % str(e))
-                try:
-                    sys.exit(0)
-                except SystemExit:
-                    os._exit(0)
-            sleep(5)
-        sleep(0.1)
-
-
-    print("\nPress Esc key over Depth Map or Grayscale to shutdown ...")  
-
-    try:
-        count = 0
-        while True:
-            frame = camera.readFrame(FrameType.DISTANCE)
-            if frame == None: 
-                sleep(0.1)
-                continue
-
-            count += 1
-
+        if frame: 
             mat_depth_rgb = np.frombuffer(frame.data_depth_rgb, dtype=np.uint16, count=-1, offset=0).reshape(frame.height, frame.width, 3)
             mat_depth_rgb = mat_depth_rgb.astype(np.uint8)
 
@@ -78,15 +44,19 @@ def main():
 
             if cv2.waitKey(1) == 27: break
 
-    except KeyboardInterrupt:    
-        print('\nShutting down ...')
-        cv2.destroyAllWindows()
-        sleep(0.1)
-        camera.close()
-        try:
-            sys.exit(0)
-        except SystemExit:
-            os._exit(0)
+
+def cleanup(camera):
+    print('\nShutting down ...')
+    cv2.destroyAllWindows()
+    camera.close()
+
 
 if __name__ == "__main__":
-    main()
+    camera = setup()
+
+    try:
+        run(camera)
+    except Exception as e:
+        print(e)
+
+    cleanup(camera)
