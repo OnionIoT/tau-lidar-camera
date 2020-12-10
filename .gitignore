@@ -9,3 +9,4 @@ lib/
 **/_build
 **/_static
 **/_templates
+*.pyc

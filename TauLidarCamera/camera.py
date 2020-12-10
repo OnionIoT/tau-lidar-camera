@@ -53,6 +53,26 @@ class Camera :
         camera = Camera()
         return camera._open(port)
 
+    @staticmethod
+    def scan():
+        '''
+        scan for available Tau LiDAR cameras
+
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        ----------
+        ports
+            A list of serial port device name that represents Tau cameras
+
+        '''
+
+        camera = Camera()
+        return camera._comm.scan()
+
     def _open(self, port=None):
 
         if self._comm._ser.is_open :

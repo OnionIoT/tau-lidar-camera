@@ -20,6 +20,33 @@ class Communication:
         self._ser.stopbits = serial.STOPBITS_ONE
         self._ser.bytesize = serial.EIGHTBITS
 
+
+    def scan(self):
+        deviceList = []
+        print('Looking for connected Tau LiDAR Camera hardware ...')
+
+        ports = list(serial.tools.list_ports.comports())
+        for port, description, address in ports:
+            self._ser.port = port
+            self._ser.open()
+            if self._ser.is_open:
+                try: 
+                    ## Verify if it is valid device
+                    dataArray = self.getIdentification()
+                    identificationValue = int(binascii.hexlify(dataArray), 16)
+                    chipType = (identificationValue & MASK_CHIP_TYPE_DEVICE) >> SHIFT_CHIP_TYPE_DEVICE
+                    chipVersion = (identificationValue & MASK_VERSION) >> SHIFT_VERSION
+
+                    nChipType = int(chipType)
+                    nChipVersion = int(chipVersion)
+
+                    if (nChipType >= 4 and nChipVersion >= 0):
+                        deviceList.append(port)
+                except:
+                    pass
+                self._ser.close()
+        return deviceList
+
     def open(self, port):
         '''
         auto detect sensor at serial port and open communication to the sensor if port is not given,
@@ -130,7 +157,7 @@ class Communication:
         data_length = len(array)
 
         if data_length == 0 :
-            print("      DATA ERROR - length is 0")
+            # print("      DATA ERROR - length is 0")
             #return False
             return (-1, bytearray(0))
 
