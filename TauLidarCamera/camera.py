@@ -102,7 +102,7 @@ class Camera :
         firmware = "%d.%d" % (major, minor)
 
         waferId, chipId = self.getChipInformation()
-        uid = "%d.%d" % (waferId, chipId)
+        uid = "%02X%04X" % (waferId, chipId)
 
         return CameraInfo(model, firmware, uid, "160x60",  self._comm._ser.port)
 
