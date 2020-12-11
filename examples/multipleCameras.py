@@ -10,7 +10,8 @@ def setup():
     Camera.setRange(0, 4500)                   ## points in the distance range to be colored
 
     uiOffset = 20
-    for port in Camera.scan():                 ## Scan for available Tau Camera devices
+    ports = Camera.scan()                 ## Scan for available Tau Camera devices
+    for port in ports:
         camera = Camera.open(port)             ## Open the first available Tau Camera
         camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
         camera.setIntegrationTime3d(0, 1000)       ## set integration time 0: 1000
@@ -32,7 +33,8 @@ def setup():
         cv2.moveWindow('Tau %s'%cameraInfo.uid, 20, uiOffset)
         uiOffset += 340
 
-    print("\nPress Esc key over GUI or Ctrl-c in terminal to shutdown ...")  
+    if len(ports) > 0:
+        print("\nPress Esc key over GUI or Ctrl-c in terminal to shutdown ...")
 
     return cameras
 
@@ -42,7 +44,7 @@ def run(cameras):
         for camera in cameras:
             frame = camera.readFrame(FrameType.DISTANCE)
 
-            if frame: 
+            if frame:
                 mat_depth_rgb = np.frombuffer(frame.data_depth_rgb, dtype=np.uint16, count=-1, offset=0).reshape(frame.height, frame.width, 3)
                 mat_depth_rgb = mat_depth_rgb.astype(np.uint8)
 
@@ -65,15 +67,10 @@ def cleanup(cameras):
 if __name__ == "__main__":
     cameras = setup()
 
-    try:
-        run(cameras)
-    except Exception as e:
-        print(e)
+    if len(cameras) > 0:
+        try:
+            run(cameras)
+        except Exception as e:
+            print(e)
 
-    cleanup(cameras)
-
-
-
-
-
-
+        cleanup(cameras)

@@ -5,32 +5,34 @@ from TauLidarCommon.frame import FrameType
 from TauLidarCamera.camera import Camera
 
 def setup():
+    camera = None
     ports = Camera.scan()                      ## Scan for available Tau Camera devices
 
-    Camera.setRange(0, 4500)                   ## points in the distance range to be colored
-    
-    camera = Camera.open(ports[0])             ## Open the first available Tau Camera
-    camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
-    camera.setIntegrationTime3d(0, 1000)       ## set integration time 0: 1000
-    camera.setMinimalAmplitude(0, 10)          ## set minimal amplitude 0: 80
+    if len(ports) > 0:
+        Camera.setRange(0, 4500)                   ## points in the distance range to be colored
 
-    cameraInfo = camera.info()
+        camera = Camera.open(ports[0])             ## Open the first available Tau Camera
+        camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
+        camera.setIntegrationTime3d(0, 1000)       ## set integration time 0: 1000
+        camera.setMinimalAmplitude(0, 10)          ## set minimal amplitude 0: 80
 
-    print("\nToF camera opened successfully:")
-    print("    model:      %s" % cameraInfo.model)
-    print("    firmware:   %s" % cameraInfo.firmware)
-    print("    uid:        %s" % cameraInfo.uid)
-    print("    resolution: %s" % cameraInfo.resolution)
-    print("    port:       %s" % cameraInfo.port)
+        cameraInfo = camera.info()
 
-    print("\nPress Esc key over GUI or Ctrl-c in terminal to shutdown ...")  
+        print("\nToF camera opened successfully:")
+        print("    model:      %s" % cameraInfo.model)
+        print("    firmware:   %s" % cameraInfo.firmware)
+        print("    uid:        %s" % cameraInfo.uid)
+        print("    resolution: %s" % cameraInfo.resolution)
+        print("    port:       %s" % cameraInfo.port)
+
+        print("\nPress Esc key over GUI or Ctrl-c in terminal to shutdown ...")
 
 
-    cv2.namedWindow('Depth Map')
-    cv2.namedWindow('Amplitude')
+        cv2.namedWindow('Depth Map')
+        cv2.namedWindow('Amplitude')
 
-    cv2.moveWindow('Depth Map', 20, 20)
-    cv2.moveWindow('Amplitude', 20, 360)
+        cv2.moveWindow('Depth Map', 20, 20)
+        cv2.moveWindow('Amplitude', 20, 360)
 
     return camera
 
@@ -39,7 +41,7 @@ def run(camera):
     while True:
         frame = camera.readFrame(FrameType.DISTANCE_AMPLITUDE)
 
-        if frame: 
+        if frame:
             mat_depth_rgb = np.frombuffer(frame.data_depth_rgb, dtype=np.uint16, count=-1, offset=0).reshape(frame.height, frame.width, 3)
             mat_depth_rgb = mat_depth_rgb.astype(np.uint8)
 
@@ -66,9 +68,10 @@ def cleanup(camera):
 if __name__ == "__main__":
     camera = setup()
 
-    try:
-        run(camera)
-    except Exception as e:
-        print(e)
+    if camera is not None:
+        try:
+            run(camera)
+        except Exception as e:
+            print(e)
 
-    cleanup(camera)
+        cleanup(camera)
