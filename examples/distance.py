@@ -56,7 +56,7 @@ def cleanup(camera):
 if __name__ == "__main__":
     camera = setup()
 
-    if camera is not None:
+    if camera:
         try:
             run(camera)
         except Exception as e:
