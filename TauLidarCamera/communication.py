@@ -28,9 +28,12 @@ class Communication:
         ports = list(serial.tools.list_ports.comports())
         for port, description, address in ports:
             self._ser.port = port
-            self._ser.open()
+            try:
+                self._ser.open()
+            except:
+                pass
             if self._ser.is_open:
-                try: 
+                try:
                     ## Verify if it is valid device
                     dataArray = self.getIdentification()
                     identificationValue = int(binascii.hexlify(dataArray), 16)
@@ -45,6 +48,10 @@ class Communication:
                 except:
                     pass
                 self._ser.close()
+
+        if len(deviceList) == 0:
+            print("No Tau Camera devices found, please check: \n1. If Tau Camera is connected; \n2. If current user has permission to access all serial ports.")
+
         return deviceList
 
     def open(self, port):
