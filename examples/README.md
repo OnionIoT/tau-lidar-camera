@@ -29,7 +29,9 @@ Command to run the program:
 #python distance.py
 ```
 
-A depth map will be showing.
+A new window rendering the 2D depth map will open:
+
+![](../docs/img/example-distance-0.png)
 
 ## `distancePlusAmplitude.py`
 
@@ -57,7 +59,9 @@ Command to run the program:
 #python distancePlusAmplitude.py
 ```
 
-Depth map and amplitude image will be showing in separate windows.
+Two new windows will open to show the depth map and amplitude coming from the camera:
+
+![](../docs/img/example-distance-amplitude-0.png)
 
 ## `distancePlusGrayscale.py`
 
@@ -85,4 +89,38 @@ Command to run the program:
 #python distancePlusGrayscale.py
 ```  
 
-Depth map and grayscale image will be showing in separate windows.
+Two new windows will open to show the depth map and grayscale image coming from the camera:
+
+![](../docs/img/example-distance-grayscale-0.png)
+
+## `multipleCameras.py`
+
+### What this demonstrates
+
+Rendering depth data from **ALL connected** Tau Cameras in real-time. You are only limited by the number of USB ports!
+
+### Pre-requisites
+
+Pre-requisites/dependencies:
+
+  #### TauLidarCamera python module:
+
+    #pip install TauLidarCamera
+
+  #### OpenCV python module
+
+    #pip install opencv-python
+
+
+
+### How to Run
+
+Command to run the program:
+
+```
+#python multipleCameras.py
+```  
+
+A new window for each connected camera will open, showing the depth map coming from each:
+
+![](../docs/img/example-multi-camera-0.png)
