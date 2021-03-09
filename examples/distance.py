@@ -9,14 +9,12 @@ def setup():
     ports = Camera.scan()                      ## Scan for available Tau Camera devices
 
     if len(ports) > 0:
-        Camera.setRange(0, 1200)                   ## points in the distance range to be colored
+        Camera.setRange(0, 4500)                   ## points in the distance range to be colored
 
         camera = Camera.open(ports[0])             ## Open the first available Tau Camera
         camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
         camera.setIntegrationTime3d(0, 1000)       ## set integration time 0: 1000
         camera.setMinimalAmplitude(0, 10)          ## set minimal amplitude 0: 80
-
-        Camera.setRange(0, 7500)                   ## points in the distance range to be colored
 
         cameraInfo = camera.info()
 
