@@ -127,10 +127,6 @@ class Camera :
         self.setMinimalAmplitude(0, 60)          ## set minimal amplitude 0: 80
         self.setOffset(0)                        ## set distance offset: 0
         self.setRoi(0, 0, 159, 59)               ## set ROI to max width and height
-        
-        ## static
-        Camera.setColorMode(ColorMode.DISTANCE)
-        Camera.setRange(0, 7500)
 
     def setModulationFrequency(self, frequency):
         '''
