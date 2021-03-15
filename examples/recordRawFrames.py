@@ -5,7 +5,6 @@ from TauLidarCommon.frame import FrameType
 from TauLidarCamera.camera import Camera
 
 
-delay = 0.2 #sec
 outputDire = './samples'
 
 def setup():
@@ -13,12 +12,10 @@ def setup():
     ports = Camera.scan()                      ## Scan for available Tau Camera devices
 
     if len(ports) > 0:
-        Camera.setRange(0, 4500)                   ## points in the distance range to be colored
-
         camera = Camera.open(ports[0])             ## Open the first available Tau Camera
         camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
         camera.setIntegrationTime3d(0, 1000)       ## set integration time 0: 1000
-        camera.setMinimalAmplitude(0, 10)          ## set minimal amplitude 0: 80
+        camera.setMinimalAmplitude(0, 80)          ## set minimal amplitude 0: 80
 
         cameraInfo = camera.info()
 
@@ -52,8 +49,6 @@ def run(camera):
                 binary_file.write(frame)
             print('\rFrame: %d'%count, end='')
             count += 1
-
-        time.sleep(delay)
 
 def cleanup(camera):
     print('\nShutting down ...')
