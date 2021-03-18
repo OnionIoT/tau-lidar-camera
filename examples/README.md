@@ -124,3 +124,113 @@ Command to run the program:
 A new window for each connected camera will open, showing the depth map coming from each:
 
 ![](../docs/img/example-multi-camera-0.png)
+
+## Record and Playback Frames
+
+These two example programs demonstrate using the Tau Camera to capture and store depth data, and then later playback the recording.
+
+The recording program is very lightweight - minimal use of libraries and minimal processing of data - so it can run smoothly on lower power devices like the Omega2. Very useful if your application makes it difficult to have your Tau Camera tethered to a full computer at all times.
+
+We've also made an example frame recording available. Check out the [example section](#an-example) below.
+
+
+### Recording Frames with `recordRawFrames.py`
+
+Capture raw frames (binary bitstream) coming from the Tau Camera and write each frame to a file.
+
+> This program is written to be as lightweight as possible - minimal use of libraries and minimal processing of data - so it can run smoothly on lower power devices like the Omega2
+
+### Pre-requisites
+
+Pre-requisites/dependencies:
+
+  #### TauLidarCamera python module:
+
+    #pip install TauLidarCamera
+
+### How to Run
+
+Command to run the program:
+
+```
+#python recordRawFrames.py
+```  
+
+Once it detects and initializes the camera, it will start capturing frames and writing them to disk. The frame files will be named according to the timestamp and placed in a new `samples` directory - for example: `samples/1616098779.62342.frame`
+
+To stop capturing frames, press **Ctrl+C** in the terminal. You will see a `Shutting down ...` message.
+
+
+## Replaying Recorded Frames with `replayRawFrames.py`
+
+The `replayRawFrames.py` program allows you to **play back** any frames you've recorded. It will render the 2D depth map and amplitude view (using OpenCV) from each captured frame.
+
+> You don't need the Tau Camera to run this program, just the recorded frames! Check out the example below to find out where to get some example frames.
+
+### Pre-requisites
+
+Pre-requisites/dependencies:
+
+  #### TauLidarCamera python module:
+
+    #pip install TauLidarCamera
+
+  #### OpenCV python module
+
+    #pip install opencv-python
+
+And some recorded frames
+
+### How to Run
+
+Command to run the program:
+
+```
+#python replayRawFrames.py
+```  
+
+Two new windows will open. They will render the 2D depth map and amplitude view for each frame one by one:
+
+![](../docs/img/example-replay-frames-0.png)
+
+By default it will read all of the frames in the `samples` directory (in this `examples` directory). The program will end and the OpenCV windows will close when all of the frames have been played back.
+
+#### Optional Argument
+
+To point the playback to a different directory, run the program with an argument:
+
+```
+#python replayRawFrames.py <DIRECTORY WITH FRAMES>
+```
+
+### An Example
+
+We've recorded a small selection of frames so you can test this out even if you don't have a Tau Camera. Follow along to try playing back frames on your own computer.
+
+1. Grab the example programs by cloning the [tau-lidar-camera GitHub repo](https://github.com/OnionIoT/tau-lidar-camera) to your computer:
+  ```
+  git clone https://github.com/OnionIoT/tau-lidar-camera.git
+  ```
+1. Navigate to the `examples` directory
+  ```
+  cd tau-lidar-camera/examples
+  ```
+1. Make sure you've installed the [pre-requisites for `replayRawFrames.py`](#pre-requisites-5)
+1. Download this zip file of recorded frames: https://onion-downloads.s3-us-west-2.amazonaws.com/tau/sample-frames/tau-frames-windowsill-0.zip
+1. Unzip it and you'll have a new `windowsill-0` directory
+1. Run the playback program and point it to the `windowsill-0` directory:
+  ```
+  #python replayRawFrames.py windowsill-0
+  ```
+
+For reference, a regular photo of the windowsill can be found at `windowsill-0/rgb-photo`. Take a look and see how it compares to the Tau's recorded frames!
+
+
+### Next Steps
+
+A few ideas on what to do next:
+
+* Try playing with the parameters passed to `Camera.setRange()` in the `replayRawFrames.py` program and see how it changes the 2D depth map
+* If you have the Tau Camera hardware, try recording your own frames and playing them back!
+* The record frames program is very lightweight, it can run on systems like the Onion Omega2. You can try using an Omega2 with a Tau Camera to capture frames and then play them back over your network 😉
+* **Try building on top of these example programs.** They're a solid foundation for your own, more complete record and playback implementation -- very useful if you don't want your Tau Camera to be tethered to a full computer at all times.

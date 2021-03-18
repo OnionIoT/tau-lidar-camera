@@ -6,7 +6,7 @@ from TauLidarCommon.frame import FrameType
 from TauLidarCamera.camera import Camera
 
 
-outputDire = './samples'
+outputDir = './samples'
 runLoop = True
 
 def setup():
@@ -28,7 +28,7 @@ def setup():
         print("    resolution: %s" % cameraInfo.resolution)
         print("    port:       %s" % cameraInfo.port)
 
-        print("\nPress Esc key over GUI or Ctrl-c in terminal to shutdown ...")
+        print("\nPress Ctrl-c in terminal to shutdown ...")
 
     return camera
 
@@ -37,8 +37,8 @@ def run(camera):
     global runLoop
     count = 0
 
-    if not os.path.exists(outputDire):
-        os.makedirs(outputDire)
+    if not os.path.exists(outputDir):
+        os.makedirs(outputDir)
 
     print('Recording...')
 
@@ -46,7 +46,7 @@ def run(camera):
         frame = camera.readFrameRawData(FrameType.DISTANCE_AMPLITUDE)
 
         if frame:
-            fName = '%s/%s.frame'%(outputDire, time.time())
+            fName = '%s/%s.frame'%(outputDir, time.time())
             with open(fName, "wb") as binary_file:
                 binary_file.write(frame)
             print('\rFrame: %d'%count, end='')
