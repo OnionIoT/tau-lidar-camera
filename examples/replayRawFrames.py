@@ -1,5 +1,6 @@
 import os
 import time
+import sys
 
 import numpy as np
 import cv2
@@ -8,7 +9,7 @@ from TauLidarCommon.frame import FrameType
 from TauLidarCamera.camera import Camera
 
 def setup():
-    Camera.setRange(0, 4500)
+    Camera.setRange(0, 2000)
 
     print("\nPress Esc key over GUI or Ctrl-c in terminal to shutdown ...")
 
@@ -30,7 +31,7 @@ def run(framesDir):
 
         print (filename)
 
-        with open(os.path.join(framesDir, filename), 'rb') as f: 
+        with open(os.path.join(framesDir, filename), 'rb') as f:
             dataArray = bytearray(f.read())
 
             frame = Camera.composeFrame(dataArray, FrameType.DISTANCE_AMPLITUDE)
@@ -53,14 +54,16 @@ def run(framesDir):
                 if cv2.waitKey(1) == 27: break
         time.sleep(delay)
 
-            
+
 
 
 
 if __name__ == "__main__":
-    setup()
-    
     framesDir = 'samples'
+    if len(sys.argv) > 1:
+        framesDir = sys.argv[1]
+
+    setup()
 
     if os.path.exists(framesDir):
         try:
