@@ -2,6 +2,17 @@
 
 Samples of programs that use the Tau LiDAR Camera, each demonstrating the functionality of the TauLidarCamera Python module.
 
+
+* [`distance.py`](#distancepy)
+* [`distancePlusAmplitude.py`](#distanceplusamplitudepy)
+* [`distancePlusGrayscale.py`](#distanceplusgrayscalepy)
+* [`multipleCameras.py`](#multiplecameraspy)
+* [Record and Playback Frames](#record-and-playback-frames)
+  + [Recording Frames with `recordRawFrames.py`](#recording-frames-with-recordrawframespy)
+  + [Replaying Recorded Frames with `replayRawFrames.py`](#replaying-recorded-frames-with-replayrawframespy)
+  + [An Example](#an-example)
+  + [Next Steps](#next-steps)
+
 ## `distance.py`
 
 ### What this demonstrates
@@ -140,7 +151,7 @@ Capture raw frames (binary bitstream) coming from the Tau Camera and write each 
 
 > This program is written to be as lightweight as possible - minimal use of libraries and minimal processing of data - so it can run smoothly on lower power devices like the Omega2
 
-### Pre-requisites
+#### Pre-requisites
 
 Pre-requisites/dependencies:
 
@@ -148,7 +159,7 @@ Pre-requisites/dependencies:
 
     #pip install TauLidarCamera
 
-### How to Run
+#### How to Run
 
 Command to run the program:
 
@@ -161,13 +172,13 @@ Once it detects and initializes the camera, it will start capturing frames and w
 To stop capturing frames, press **Ctrl+C** in the terminal. You will see a `Shutting down ...` message.
 
 
-## Replaying Recorded Frames with `replayRawFrames.py`
+### Replaying Recorded Frames with `replayRawFrames.py`
 
 The `replayRawFrames.py` program allows you to **play back** any frames you've recorded. It will render the 2D depth map and amplitude view (using OpenCV) from each captured frame.
 
 > You don't need the Tau Camera to run this program, just the recorded frames! Check out the example below to find out where to get some example frames.
 
-### Pre-requisites
+#### Pre-requisites
 
 Pre-requisites/dependencies:
 
@@ -181,7 +192,7 @@ Pre-requisites/dependencies:
 
 And some recorded frames
 
-### How to Run
+#### How to Run
 
 Command to run the program:
 
