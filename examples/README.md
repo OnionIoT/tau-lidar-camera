@@ -222,14 +222,14 @@ We've recorded a small selection of frames so you can test this out even if you 
   ```
   git clone https://github.com/OnionIoT/tau-lidar-camera.git
   ```
-1. Navigate to the `examples` directory
+2. Navigate to the `examples` directory
   ```
   cd tau-lidar-camera/examples
   ```
-1. Make sure you've installed the [pre-requisites for `replayRawFrames.py`](#pre-requisites-5)
-1. Download this zip file of recorded frames: https://onion-downloads.s3-us-west-2.amazonaws.com/tau/sample-frames/tau-frames-windowsill-0.zip
-1. Unzip it and you'll have a new `windowsill-0` directory
-1. Run the playback program and point it to the `windowsill-0` directory:
+3. Make sure you've installed the [pre-requisites for `replayRawFrames.py`](#pre-requisites-5)
+4. Download this zip file of recorded frames: https://onion-downloads.s3-us-west-2.amazonaws.com/tau/sample-frames/tau-frames-windowsill-0.zip
+5. Unzip it and you'll have a new `windowsill-0` directory
+6. Run the playback program and point it to the `windowsill-0` directory:
   ```
   #python replayRawFrames.py windowsill-0
   ```
