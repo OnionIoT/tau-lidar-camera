@@ -142,7 +142,7 @@ These two example programs demonstrate using the Tau Camera to capture and store
 
 The recording program is very lightweight - minimal use of libraries and minimal processing of data - so it can run smoothly on lower power devices like the Omega2. Very useful if your application makes it difficult to have your Tau Camera tethered to a full computer at all times.
 
-We've also made an example frame recording available. Check out the [example section](#an-example) below.
+We've also made an example frame recording available. Check out the [example section](#an-example) below. **You don't need to have the Tau Camera hardware to try this out!**
 
 
 ### Recording Frames with `recordRawFrames.py`
