@@ -10,3 +10,5 @@ lib/
 **/_static
 **/_templates
 *.pyc
+
+**/.DS_Store

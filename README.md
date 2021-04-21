@@ -25,7 +25,7 @@ Install using pip on the command line:
 python -m pip install TauLidarCamera
 ```
 
-Supports Python 3.6.1+
+Supports Python 3.7+
 
 ## API Reference & Documentation on [ReadTheDocs](https://taulidarcamera.readthedocs.io/)
 
