@@ -262,10 +262,6 @@ It operates in two modes:
 1. Scanning all serial ports to determine if there's any connected Tau LiDAR Cameras. If so, connect to the first available Camera.
 2. The serial port for Tau Camera is specified as an argument, and the program will only attempt to connect to a Tau LiDAR Camera on that serial port
 
-When debugging your connection issues, first try running the program in the first mode where it scans all serial ports. You will get some idea of what's going on based on the command line output.
-
-When you've narrowed down which
-
 ### Pre-requisites
 
 Pre-requisites/dependencies:
@@ -280,6 +276,10 @@ Pre-requisites/dependencies:
 
 
 ### How to Run
+
+When debugging your connection issues, first try running the program in the first mode where it scans all serial ports. You will get some idea of what's going on based on the command line output.
+
+If, after that, your problem still hasn't been resolved and you've narrowed down that your Tau Camera should be on a specific port, try running the program in the second mode where a serial port is specified. From the output, you'll have an idea of what's going wrong.
 
 #### Mode 1 - Scanning All Ports
 
