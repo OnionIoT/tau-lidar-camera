@@ -1,17 +1,27 @@
+import argparse
 import numpy as np
 import cv2
 
 from TauLidarCommon.frame import FrameType
 from TauLidarCamera.camera import Camera
 
-def setup():
+def setup(serialPort=None):
+    port = None
     camera = None
-    ports = Camera.scan()                      ## Scan for available Tau Camera devices
 
-    if len(ports) > 0:
+    # if no serial port is specified, scan for available Tau Camera devices
+    if serialPort is None:
+        ports = Camera.scan()                      ## Scan for available Tau Camera devices
+
+        if len(ports) > 0:
+            port = ports[0]
+    else:
+        port = serialPort
+
+    if port is not None:
         Camera.setRange(0, 4500)                   ## points in the distance range to be colored
 
-        camera = Camera.open(ports[0])             ## Open the first available Tau Camera
+        camera = Camera.open(port)             ## Open the first available Tau Camera
         camera.setModulationChannel(0)             ## autoChannelEnabled: 0, channel: 0
         camera.setIntegrationTime3d(0, 1000)       ## set integration time 0: 1000
         camera.setMinimalAmplitude(0, 10)          ## set minimal amplitude 0: 80
@@ -66,7 +76,13 @@ def cleanup(camera):
 
 
 if __name__ == "__main__":
-    camera = setup()
+    parser = argparse.ArgumentParser(description='Sample program to demonstrate acquiring frames with both distance / depth and amplitude data from the Tau LiDAR Camera')
+    parser.add_argument('--port', metavar='<serial port>', default=None,
+                        help='Specify a serial port for the Tau Camera')
+    args = parser.parse_args()
+
+
+    camera = setup(args.port)
 
     if camera:
         try:
