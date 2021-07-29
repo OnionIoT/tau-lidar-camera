@@ -152,6 +152,9 @@ class Communication:
             a = bytearray(buf)
             array.extend(a)
 
+            count += 1
+            if count > 100 : break
+
         return self._processData(array, size)
 
     def _processData(self, array, size):
